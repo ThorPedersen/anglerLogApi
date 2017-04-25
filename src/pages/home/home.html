@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <ion-card-header>
+      Add new Catch
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Anglers Name</ion-label>
+        <ion-input type="text" [(ngModel)]="currentCatch.angler_name" name="anglers name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date / Time</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="currentCatch.datetime" name="date / time"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fishing Method</ion-label>
+        <ion-input type="text" [(ngModel)]="currentCatch.fishing_method" name="fishing method"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Breed</ion-label>
+        <ion-input type="text" [(ngModel)]="currentCatch.breed" name="breed"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Length</ion-label>
+        <ion-input type="text" [(ngModel)]="currentCatch.length" name="length"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Weight</ion-label>
+        <ion-input type="text" [(ngModel)]="currentCatch.weight" name="weight"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Weather</ion-label>
+        <ion-input type="text" [(ngModel)]="currentCatch.weather" name="weather"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Location</ion-label>
+        <ion-input type="text" [(ngModel)]="currentCatch.location" name="location"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Latitude</ion-label>
+        <ion-input type="text" [(ngModel)]="currentCatch.longitude" name="Longitude"></ion-input>
+      </ion-item>
+            <ion-item>
+        <ion-label>Longitude</ion-label>
+        <ion-input type="text" [(ngModel)]="currentCatch.latitude" name="Latitude"></ion-input>
+      </ion-item>
+      <button ion-button (click)="addCatch()">Create Log</button>
+      
+    </ion-card-content>
+
+  </ion-card>
+ 
+<ion-card>
+  <ion-list>
+    <ion-item *ngFor="let catch of catches">
+      <div>Angler name: {{ catch.angler_name }}</div>
+      <div *ngIf="list[0] == true">Date: {{ catch.datetime }}</div>
+      <div *ngIf="list[1] == true">Fishing method: {{ catch.fishing_method }}</div>
+      <div *ngIf="list[2] == true">Breed: {{ catch.breed }}</div>
+      <div *ngIf="list[3] == true">Length: {{ catch.length }}</div>
+      <div *ngIf="list[4] == true">Weight: {{ catch.weight }}</div>
+      <div *ngIf="list[5] == true">Weather: {{ catch.weather }}</div>
+      <div *ngIf="list[6] == true">Location: {{ catch.location }}</div>
+      <div *ngIf="list[7] == true">Latitude: {{ catch.latitude }}</div>
+      <div *ngIf="list[8] == true">Longitude: {{ catch.longitude }}</div>
+      <button ion-button (click)="checkOnMap(catch.longitude, catch.latitude)">See on map</button>
+      </ion-item>
+  </ion-list>
+</ion-card>
+
+</ion-content>

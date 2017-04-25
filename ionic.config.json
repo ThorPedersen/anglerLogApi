@@ -1,0 +1,16 @@
+{
+  "name": "AnglerLogApi",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://api.evang.dk/v1"
+    },
+    {
+      "path": "/Weatherapi",
+      "proxyUrl": "http://api.openweathermap.org/data/2.5"
+    }
+  ],
+  "v2": true,
+  "typescript": true
+}
