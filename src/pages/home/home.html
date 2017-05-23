@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Home Page
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -54,28 +54,32 @@
         <ion-label>Longitude</ion-label>
         <ion-input type="text" [(ngModel)]="currentCatch.latitude" name="Latitude"></ion-input>
       </ion-item>
-      <button ion-button (click)="addCatch()">Create Log</button>
-      
+      <button ion-button (click)="addCatch()">Create Log</button>    
     </ion-card-content>
 
   </ion-card>
  
-<ion-card>
   <ion-list>
-    <ion-item *ngFor="let catch of catches">
-      <div>Angler name: {{ catch.angler_name }}</div>
-      <div *ngIf="list[0] == true">Date: {{ catch.datetime }}</div>
-      <div *ngIf="list[1] == true">Fishing method: {{ catch.fishing_method }}</div>
-      <div *ngIf="list[2] == true">Breed: {{ catch.breed }}</div>
-      <div *ngIf="list[3] == true">Length: {{ catch.length }}</div>
-      <div *ngIf="list[4] == true">Weight: {{ catch.weight }}</div>
-      <div *ngIf="list[5] == true">Weather: {{ catch.weather }}</div>
-      <div *ngIf="list[6] == true">Location: {{ catch.location }}</div>
-      <div *ngIf="list[7] == true">Latitude: {{ catch.latitude }}</div>
-      <div *ngIf="list[8] == true">Longitude: {{ catch.longitude }}</div>
-      <button ion-button (click)="checkOnMap(catch.longitude, catch.latitude)">See on map</button>
-      </ion-item>
+    <div *ngFor="let catch of catches">
+      <ion-item class="item-stable" (click)="toggleGroup(catch)" [ngClass]="{active: isGroupShown(catch)}">
+          <ion-icon name="add" [hidden]="isGroupShown(catch)"></ion-icon>
+          <ion-icon name="remove" [hidden]="!isGroupShown(catch)"></ion-icon>                  
+          {{catch.angler_name}}
+          </ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)" *ngIf="list[0] == true">Date: {{catch.datetime}}</ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)" *ngIf="list[1] == true">Method: {{catch.fishing_method}}</ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)" *ngIf="list[2] == true">Breed: {{catch.breed}}</ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)" *ngIf="list[3] == true">Length: {{catch.length}}</ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)" *ngIf="list[4] == true">Weight: {{catch.weight}}</ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)" *ngIf="list[5] == true">Weather: {{catch.weather}}</ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)" *ngIf="list[6] == true">Location: {{catch.location}}</ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)" *ngIf="list[7] == true">Latitude: {{catch.latitude}}</ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)" *ngIf="list[8] == true">Longitude: {{catch.longitude}}</ion-item>
+          <ion-item class="item-accordion" [hidden]="!isGroupShown(catch)">
+            <button ion-button (click)="checkOnMap(catch.longitude, catch.latitude)">See on map</button>
+          </ion-item>
+          
+    </div>
   </ion-list>
-</ion-card>
 
 </ion-content>

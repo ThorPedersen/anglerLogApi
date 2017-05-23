@@ -3,10 +3,10 @@ import { Storage } from '@ionic/storage';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-contact',
-  templateUrl: 'contact.html'
+  selector: 'page-settings',
+  templateUrl: 'settings.html'
 })
-export class ContactPage {
+export class settingsPage {
 
   public list: boolean[] = [];
   private storage:Storage;
@@ -20,7 +20,7 @@ export class ContactPage {
         this.storage.get('settings').then((val) => {
           if(val == null)
           {
-            this.list = [true, true, true, true, true, true, false, false];
+            this.list = [true, true, true, true, true, true, true, false, false];
             this.storage.set('settings', this.list);
           }
           else

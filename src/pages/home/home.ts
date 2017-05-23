@@ -7,10 +7,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { SimpleCatch } from '../../models/catches';
 import { WeatherObject } from '../../models/weather';
-//import { LonLatObject } from '../../models/lonlat';
 import { Geolocation } from '@ionic-native/geolocation';
 
-import { AboutPage } from '../about/about';
+import { MapPage } from '../map/map';
 
 @Component({
   selector: 'page-home',
@@ -19,6 +18,7 @@ import { AboutPage } from '../about/about';
 export class HomePage {
   public list: boolean[] = [];
   private storage:Storage;
+  public shownGroup;
 
   public currentCatch:SimpleCatch = new SimpleCatch();
   public catches:Array<SimpleCatch> = new Array<SimpleCatch>();
@@ -27,7 +27,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, public http:Http, private geolocation: Geolocation, storages: Storage) {
 
     this.storage = storages;
-
+    
     http.get("api/catches")
     .subscribe(
       data => {
@@ -36,8 +36,14 @@ export class HomePage {
 
     let watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
+      
+      //This is how the code should be, and it sometimes work in edge and chrome, and sometimes not. Should be identical to Kim whose code does work.
+      //could possibly be an issue with Google
       this.currentCatch.latitude = data.coords.latitude;
       this.currentCatch.longitude = data.coords.longitude;
+
+      //this.currentCatch.latitude = 55.531118;
+      //this.currentCatch.longitude = 11.837494;
 
       http.get("Weatherapi/weather?lat=" + this.currentCatch.latitude + "&lon=" + this.currentCatch.longitude + "&units=metric&appid=5e8ca396b0b5be1ddec6aa9d0b3b0d37")
       .subscribe(
@@ -52,7 +58,7 @@ export class HomePage {
         this.storage.get('settings').then((val) => {
           if(val == null)
           {
-            this.list = [true, true, true, true, true, true, false, false];
+            this.list = [true, true, true, true, true, true, true, false, false];
             this.storage.set('settings', this.list);
           }
           else
@@ -62,7 +68,17 @@ export class HomePage {
         })
       });
   }
+  public isGroupShown(group) {
+    return this.shownGroup === group;
+  };
 
+  public toggleGroup(group) {
+    if (this.isGroupShown(group)) {
+      this.shownGroup = null;
+    } else {
+      this.shownGroup = group;
+    }
+  };
   public addCatch() 
   {   
     alert(JSON.stringify(this.currentCatch));
@@ -93,10 +109,10 @@ export class HomePage {
   }
   public checkOnMap($latitude:number, $longitude:number)
   {
-    /*this.navCtrl.push(AboutPage, {
+    this.navCtrl.push(MapPage, {
       firstpassed: $latitude,
       secondpassed: $longitude
-    });*/
+    });
     console.log("Latitude: " + $latitude + ". Longitude: " + $longitude)
   }
 }
