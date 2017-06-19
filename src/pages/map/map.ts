@@ -44,9 +44,9 @@ export class MapPage {
  map.one(GoogleMapsEvent.MAP_READY).then(() => console.log('Map is ready!'));
 
  // create LatLng object
- let ionic: LatLng = new LatLng(43.0741904,-89.3809802);
+ //let ionic: LatLng = new LatLng(43.0741904,-89.3809802);
  // real coordinates if geolocation actually worked
- // let ionic: LatLng = new LatLng(firstparams,secondparams);
+ let ionic: LatLng = new LatLng(this.firstparams,this.secondparams);
 
  // create CameraPosition
  let position: CameraPosition = {
@@ -59,7 +59,7 @@ export class MapPage {
  map.moveCamera(position);
 
  // create new marker
- /*let markerOptions: MarkerOptions = {
+ let markerOptions: MarkerOptions = {
    position: ionic,
    title: 'Ionic'
  };
@@ -67,7 +67,7 @@ export class MapPage {
  const marker: Marker = map.addMarker(markerOptions)
    .then((marker: Marker) => {
       marker.showInfoWindow();
-    });*/
+    });
  }
 
 }
